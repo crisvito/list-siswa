@@ -23,6 +23,8 @@
         </div>
     </div>
 
+
+    @include('Layouts.script')
 </body>
 
 </html>

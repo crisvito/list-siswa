@@ -21,6 +21,15 @@
     .detail .link-action a {
         @apply hover:underline hover:font-bold border-x border-gray-800 px-2;
     }
+    .list_data div {
+        @apply bg-gray-50 px-5 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 border-b border-gray-200;
+    }
+    .list_data div dt {
+        @apply text-sm font-medium text-gray-500;
+    }
+    .list_data div dd {
+        @apply text-sm text-gray-900 sm:col-span-2;
+    }
 }
 
 input::-webkit-outer-spin-button,

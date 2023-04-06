@@ -5,8 +5,8 @@
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div class="flex items-center justify-between pb-4 bg-white dark:bg-gray-900">
             @if (session('success'))
-                <div class="fixed z-10 bottom-5 right-5 p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-200">
-                    <span class="font-medium">Success.</span>{{ session('success') }}
+                <div class="fixed z-10 bottom-5 right-5 p-4 mb-4 text-lg text-green-800 rounded-lg bg-green-200">
+                    <span class="font-medium">Berhasil. </span>{{ session('success') }}
                 </div>
             @endif
             <div class="relative">
@@ -15,17 +15,17 @@
                 </div>
                 <input type="text" id="table-search-users"
                     class="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Search for siswa">
+                    placeholder="Cari Data siswa">
             </div>
         </div>
         <table class="w-full text-sm text-left">
             <thead class="text-xs text-white uppercase bg-gray-700">
                 <tr>
-                    <th scope="col" class="px-6 py-3">Name</th>
+                    <th scope="col" class="px-6 py-3">Nama</th>
                     <th scope="col" class="px-6 py-3">Email</th>
                     <th scope="col" class="px-6 py-3">Nis</th>
                     <th scope="col" class="px-6 py-3">Jurusan</th>
-                    <th scope="col" class="px-6 py-3">Action</th>
+                    <th scope="col" class="px-6 py-3">Aksi</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,15 +45,25 @@
                         <td>{{ $item->jurusan }}</td>
                         <td>
                             <a href={{ route('siswas.edit', $item->slug) }}
-                                class="font-medium text-blue-600 hover:underline border-r border-blue-900 pr-2 pl-1">Edit</a>
-                            <a href={{ route('siswas.show', $item->slug) }}
-                                class="font-medium text-amber-600 hover:underline border-r border-amber-900 pr-2 pl-1">Detail</a>
-                            <a href="#" class="font-medium text-red-600 hover:underline pl-1">Delete</a>
+                                class="font-medium text-blue-600 hover:underline border-r border-blue-900 pr-2 pl-1">Ubah</a>
+                            <button data-modal-target="defaultModal{{ $item->nis }}"
+                                data-modal-toggle="defaultModal{{ $item->nis }}"
+                                class="font-medium text-amber-600 hover:underline border-r border-amber-900 pr-2 pl-1">Detail</button>
+
+                            <form action={{ route('siswas.destroy', $item->slug) }} method="POST" class="inline-flex">
+                                @method('delete')
+                                @csrf
+                                <button class=".show_confirm font-medium text-red-600 hover:underline pl-1 inline"
+                                    onclick="deleteConfirm(event)">Hapus</button>
+                            </form>
                         </td>
                     </tr>
+                    @include('siswa.show', ['siswa' => $item])
                 @endforeach
             </tbody>
         </table>
     </div>
+
+
 
 @endsection

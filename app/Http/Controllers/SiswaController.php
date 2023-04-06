@@ -12,6 +12,7 @@ class SiswaController extends Controller
      */
     public function index()
     {
+
         return view('home', [
             'siswa' => Siswa::all()
         ]);
@@ -118,11 +119,12 @@ class SiswaController extends Controller
      */
     public function destroy(Siswa $siswa)
     {
-        dd($siswa->image);
-        if ($siswa->image) {
-            unlink("siswa-images/" . $siswa->image);
+        if ($siswa->getOriginal()['avatar'] !== 'avatar.jpg') {
+            unlink("siswa-images/" . $siswa->getOriginal()['avatar']);
         }
+
+
         Siswa::destroy($siswa->id);
-        return redirect('/dashboard/stories')->with('success', 'Story has been deleted');
+        return redirect('/')->with('success', 'Data Siswa Telah Dihapus');
     }
 }

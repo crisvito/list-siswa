@@ -1,54 +1,67 @@
-@extends('Layouts.main')
-@section('title', 'Detail')
+<!-- Main modal -->
+<div id="defaultModal{{ $siswa->nis }}" tabindex="-1" aria-hidden="true"
+    class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-5 h-[calc(100%-1rem)] md:h-full">
+    <div class="relative w-full h-full max-w-2xl md:h-auto">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow">
+            <!-- Modal header -->
+            <div class="flex items-start justify-between p-4 pb-3 border-b rounded-t">
+                <h3 class="text-xl font-semibold text-gray-900">
+                    Detail Data Siswa
+                </h3>
+                <button type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+                    data-modal-hide="defaultModal{{ $siswa->nis }}">
+                    <i class="fa-solid fa-x"></i>
+                </button>
+            </div>
+            <div class="detail overflow-hidden border shadow-2xl rounded-b-lg">
+                <div class="border-t border-gray-200">
+                    <dl class="flex w-full">
+                        <div class="bg-white px-10 py-5">
+                            <dd class="mt-1 text-sm text-gray-900 sm:col-span-2">
+                                <img src={{ asset('siswa-images/' . $siswa->avatar) }} alt={{ $siswa->full_name }}
+                                    class="w-24 rounded-lg">
+                            </dd>
+                        </div>
+                        <div class="list_data">
+                            <div>
+                                <dt>Nama Lengkap</dt>
+                                <dd>{{ $siswa->full_name }}
+                                </dd>
+                            </div>
+                            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt>NIS</dt>
+                                <dd>{{ $siswa->nis }}</dd>
+                            </div>
+                            <div>
+                                <dt>Email address</dt>
+                                <dd>{{ $siswa->email }}</dd>
+                            </div>
+                            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt>Jurusan</dt>
+                                <dd>{{ $siswa->jurusan }}</dd>
+                            </div>
+                            <div>
+                                <dt>Mobile</dt>
+                                <dd>{{ $siswa->mobile }}</dd>
+                            </div>
+                            <div>
+                                <dt>Tempat Lahir</dt>
+                                <dd>{{ $siswa->tempat_lahir }}
+                                </dd>
+                            </div>
+                            <div>
+                                <dt>Tanggal Lahir</dt>
+                                <dd>
+                                    {{ $siswa->tanggal_lahir }}
+                                </dd>
+                            </div>
 
-@section('container')
-    <div class="detail overflow-hidden bg-gray-100 border shadow-2xl rounded-xl">
-        <div class="px-4 py-5 sm:px-6 flex flex-col md:flex-row justify-between">
-            <h3 class="text-lg font-semibold leading-6 text-gray-900">Detail Data Siswa</h3>
-            <div class="link-action flex gap-5 font-medium">
-                <a href="/" class="text-blue-800">Back</a>
-                <a href={{ route('siswas.edit', $siswa->slug) }} class="text-amber-600">Edit</a>
-                <a href="" class="text-red-800">Delete</a>
+                        </div>
+                    </dl>
+                </div>
             </div>
         </div>
-        <div class="border-t border-gray-200">
-            <dl>
-                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">Full name</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ $siswa->full_name }}</dd>
-                </div>
-                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">NIS</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ $siswa->nis }}</dd>
-                </div>
-                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">Email address</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ $siswa->email }}</dd>
-                </div>
-                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">Jurusan</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ $siswa->jurusan }}</dd>
-                </div>
-                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">Mobile</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ $siswa->mobile }}</dd>
-                </div>
-                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">Tempat Lahir</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ $siswa->tempat_lahir }}</dd>
-                </div>
-                <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">Tanggal Lahir</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{{ $siswa->tanggal_lahir }}</dd>
-                </div>
-                <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">Avatar</dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                        <img src={{ asset('siswa-images/' . $siswa->avatar) }} alt={{ $siswa->full_name }} class="w-24">
-                    </dd>
-                </div>
-            </dl>
-        </div>
     </div>
-
-@endsection
+</div>

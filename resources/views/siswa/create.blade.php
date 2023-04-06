@@ -65,8 +65,8 @@
                 <input type="number" name="mobile" id="mobile" class="peer" placeholder=" " min="0"
                     value="{{ old('mobile') }}">
                 <label for="mobile"
-                    class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Phone
-                    number</label>
+                    class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">No
+                    Telepon</label>
                 @error('mobile')
                     <p class="text-[10px] text-red-900 font-bold pt-1 uppercase ">{{ $message }}</p>
                 @enderror
@@ -78,8 +78,8 @@
                 <input type="text" name="first_name" id="first_name" class="peer" placeholder=" "
                     value="{{ old('first_name') }}" />
                 <label for="first_name"
-                    class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">First
-                    name</label>
+                    class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nama
+                    Depan</label>
                 @error('first_name')
                     <p class="text-[10px] text-red-900 font-bold pt-1 uppercase ">{{ $message }}</p>
                 @enderror
@@ -88,15 +88,16 @@
                 <input type="text" name="last_name" id="last_name" class="peer" placeholder=" "
                     value="{{ old('last_name') }}" />
                 <label for="last_name"
-                    class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Last
-                    name</label>
+                    class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600  peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Nama
+                    Belakang <span class="text-xs">* opsional</span></label>
                 @error('last_name')
                     <p class="text-[10px] text-red-900 font-bold pt-1">{{ $message }}</p>
                 @enderror
             </div>
         </div>
         <div class="input_file relative z-0 w-full mb-6 group">
-            <label class="block text-sm text-gray-800 pb-1 pl-1" for="avatar">Input Image</label>
+            <label class="block text-sm text-gray-800 pb-1 pl-1" for="avatar">Foto Avatar<span class="text-xs">*
+                    opsional</span></label>
             <input id="avatar" type="file" value="{{ old('avatar') }}" name="avatar" onchange="getImg(event)">
             @error('avatar')
                 <p class="text-[10px] text-red-900 font-bold pt-1 uppercase ">{{ $message }}</p>
@@ -108,12 +109,4 @@
 
         <button type="submit">Tambah Siswa</button>
     </form>
-
-    <script>
-        function getImg(event) {
-            const imgPre = document.querySelector(".img-pre");
-            const src = URL.createObjectURL(event.target.files[0]);
-            imgPre.src = src;
-        }
-    </script>
 @endsection

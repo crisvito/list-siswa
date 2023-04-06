@@ -16,4 +16,6 @@ use App\Http\Controllers\SiswaController;
 
 Route::get('/', [SiswaController::class, 'index']);
 
-Route::resource('siswa', SiswaController::class)->except('index');
+Route::resource('siswas', SiswaController::class)->except('index')->scoped([
+  'siswa' => 'slug',
+]);;

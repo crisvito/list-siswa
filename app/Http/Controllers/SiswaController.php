@@ -48,8 +48,9 @@ class SiswaController extends Controller
             $request->avatar->move(public_path('siswa-images'), $validation['avatar']);
         } else $validation['avatar'] = 'avatar.jpg';
 
-        $name = $validation["first_name"] . $validation["last_name"];
+        $name = strtolower($validation["first_name"] . "-" . $validation["last_name"]);
         $validation["slug"] = "$name-" . $validation['nis'];
+        $validation['full_name'] = $validation["first_name"] . " " . $validation["last_name"];
 
 
         Siswa::create($validation);
@@ -61,7 +62,9 @@ class SiswaController extends Controller
      */
     public function show(Siswa $siswa)
     {
-        //
+        return view('siswa.show', [
+            'siswa' => $siswa
+        ]);
     }
 
     /**
@@ -69,7 +72,9 @@ class SiswaController extends Controller
      */
     public function edit(Siswa $siswa)
     {
-        //
+        return view('siswa.edit', [
+            'siswa' => $siswa
+        ]);
     }
 
     /**
@@ -77,7 +82,35 @@ class SiswaController extends Controller
      */
     public function update(Request $request, Siswa $siswa)
     {
-        //
+        $validation = $request->validate([
+            'nis' => 'required|digits:8',
+            'jurusan' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'email' => 'required|email',
+            'first_name' => 'required',
+            'last_name' => 'nullable',
+            'mobile' => 'required|min:10|max:13',
+            'avatar' => 'image|file|max:5000',
+        ]);
+
+        if ($request->file('avatar')) {
+            if ($siswa->getOriginal()['avatar'] !== 'avatar.jpg') {
+                unlink("siswa-images/" . $siswa->getOriginal()['avatar']);
+            }
+            $fileName = preg_replace('/\s+/', '', $request->file('avatar')->getClientOriginalName());
+            $validation['avatar'] = md5(microtime()) . '_' . $fileName;
+            $request->avatar->move(public_path('siswa-images'), $validation['avatar']);
+        }
+
+        $name = strtolower($validation["first_name"] . "-" . $validation["last_name"]);
+        $validation["slug"] = "$name-" . $validation['nis'];
+        $validation['full_name'] = $validation["first_name"] . " " . $validation["last_name"];
+
+
+        Siswa::where('id', $siswa->id)
+            ->update($validation);
+        return redirect('/')->with('success', 'Telah Mengubah Data Siswa');
     }
 
     /**
@@ -85,6 +118,11 @@ class SiswaController extends Controller
      */
     public function destroy(Siswa $siswa)
     {
-        //
+        dd($siswa->image);
+        if ($siswa->image) {
+            unlink("siswa-images/" . $siswa->image);
+        }
+        Siswa::destroy($siswa->id);
+        return redirect('/dashboard/stories')->with('success', 'Story has been deleted');
     }
 }

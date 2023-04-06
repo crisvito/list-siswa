@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('siswas', function (Blueprint $table) {
             $table->id();
             $table->integer('nis')->unique();
+            $table->string('full_name');
             $table->string('first_name');
             $table->string('last_name')->nullable();
             $table->string('jurusan');
             $table->string('slug')->unique();
+            $table->string('tempat_lahir');
+            $table->string('tanggal_lahir');
             $table->string('email')->unique();
             $table->string('avatar')->nullable();
             $table->bigInteger('mobile')->unique();

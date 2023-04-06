@@ -5,8 +5,8 @@
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div class="flex items-center justify-between pb-4 bg-white dark:bg-gray-900">
             @if (session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
+                <div class="fixed z-10 bottom-5 right-5 p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-200">
+                    <span class="font-medium">Success.</span>{{ session('success') }}
                 </div>
             @endif
             <div class="relative">
@@ -33,19 +33,20 @@
                     <tr class="list_siswa bg-white border-b text-gray-500 border-gray-400 hover:bg-gray-200">
                         <th scope="row"
                             class="flex items-center px-5 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                            <img class="w-10 h-10 rounded-full" src={{ 'siswa-images/' . $item->avatar }} alt="">
+                            <img class="w-10 h-10 rounded-full" src={{ asset('siswa-images/' . $item->avatar) }}
+                                alt={{ $item->full_name }}>
                             <span class="text-base pl-2 flex">
                                 {!! join('<br/>', [$item->first_name, $item->last_name]) !!}
 
                             </span>
                         </th>
                         <td>{{ $item->email }}</td>
-                        <td>{{ $item->mobile }}</td>
+                        <td>{{ $item->nis }}</td>
                         <td>{{ $item->jurusan }}</td>
                         <td>
-                            <a href="#"
+                            <a href={{ route('siswas.edit', $item->slug) }}
                                 class="font-medium text-blue-600 hover:underline border-r border-blue-900 pr-2 pl-1">Edit</a>
-                            <a href="#"
+                            <a href={{ route('siswas.show', $item->slug) }}
                                 class="font-medium text-amber-600 hover:underline border-r border-amber-900 pr-2 pl-1">Detail</a>
                             <a href="#" class="font-medium text-red-600 hover:underline pl-1">Delete</a>
                         </td>

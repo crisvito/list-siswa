@@ -18,6 +18,9 @@
     .form_input .input_file input {
         @apply block  w-full lg:w-80 text-xs text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none;
     }
+    .detail .link-action a {
+        @apply hover:underline hover:font-bold border-x border-gray-800 px-2;
+    }
 }
 
 input::-webkit-outer-spin-button,

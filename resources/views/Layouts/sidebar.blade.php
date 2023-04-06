@@ -30,7 +30,8 @@
                 </a>
             </li>
             <li>
-                <a href="/siswa/create" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-200">
+                <a href={{ route('siswas.create') }}
+                    class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-200">
                     <i class="fa-solid fa-square-plus text-lg"></i>
                     <span class="ml-3">Create</span>
                 </a>

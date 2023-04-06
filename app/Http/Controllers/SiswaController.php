@@ -12,7 +12,9 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        //
+        return view('home', [
+            'siswa' => Siswa::all()
+        ]);
     }
 
     /**
@@ -20,7 +22,7 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        //
+        return view('siswa.create');
     }
 
     /**
@@ -28,7 +30,30 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validation = $request->validate([
+            'nis' => 'required|unique:siswas|digits:8',
+            'jurusan' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'email' => 'required|unique:siswas|email',
+            'first_name' => 'required',
+            'last_name' => 'nullable',
+            'mobile' => 'required|min:10|max:13',
+            'avatar' => 'image|file|max:5000',
+        ]);
+
+        if ($request->file('avatar')) {
+            $fileName = preg_replace('/\s+/', '', $request->file('avatar')->getClientOriginalName());
+            $validation['avatar'] = md5(microtime()) . '_' . $fileName;
+            $request->avatar->move(public_path('siswa-images'), $validation['avatar']);
+        } else $validation['avatar'] = 'avatar.jpg';
+
+        $name = $validation["first_name"] . $validation["last_name"];
+        $validation["slug"] = "$name-" . $validation['nis'];
+
+
+        Siswa::create($validation);
+        return redirect('/')->with('success', 'Telah Menambah Data Siswa');
     }
 
     /**

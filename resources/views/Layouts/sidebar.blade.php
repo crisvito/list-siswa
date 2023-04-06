@@ -11,18 +11,7 @@
             </div>
             <div class="flex items-center">
                 <div class="flex items-center ml-3">
-                    <form class="m-0">
-                        <div class="relative">
-                            <input type="search" id="default-search"
-                                class="block w-72 p-2 text-sm text-gray-900 border border-gray-400 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
-                                placeholder="Search" required>
-
-                            <button type="submit" class="absolute right-3 bottom-2.5 cursor-pointer">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                            </button>
-                        </div>
-                    </form>
-
+                    {{-- Masih Kosong --}}
                 </div>
             </div>
         </div>
@@ -30,18 +19,18 @@
 </nav>
 
 <aside id="logo-sidebar"
-    class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-300 sm:translate-x-0"
+    class="fixed top-0 left-0 z-40 w-60 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-300 sm:translate-x-0"
     aria-label="Sidebar">
     <div class="h-full px-3 pb-4 overflow-y-auto bg-white">
         <ul class="space-y-2 font-medium tracking-wide">
             <li>
-                <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-200">
+                <a href="/" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-200">
                     <i class="fa-solid fa-house"></i>
                     <span class="ml-3">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="#" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-200">
+                <a href="/siswa/create" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-200">
                     <i class="fa-solid fa-square-plus text-lg"></i>
                     <span class="ml-3">Create</span>
                 </a>

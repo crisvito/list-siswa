@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSiswaRequest;
+use App\Http\Requests\UpdateSiswaRequest;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class SiswaController extends Controller
 {
@@ -14,7 +17,7 @@ class SiswaController extends Controller
     {
 
         return view('home', [
-            'siswa' => Siswa::all()
+            'siswa' => Siswa::latest()->filter(request('s'))->paginate(5)
         ]);
     }
 
@@ -29,22 +32,13 @@ class SiswaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreSiswaRequest $request)
     {
-        $validation = $request->validate([
-            'nis' => 'required|unique:siswas|digits:8',
-            'jurusan' => 'required',
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
-            'email' => 'required|unique:siswas|email',
-            'first_name' => 'required',
-            'last_name' => 'nullable',
-            'mobile' => 'required|min:10|max:13',
-            'avatar' => 'image|file|max:5000',
-        ]);
+        $validation = $request->validated();
 
         if ($request->file('avatar')) {
-            $fileName = preg_replace('/\s+/', '', $request->file('avatar')->getClientOriginalName());
+            $originalName = $request->file('avatar')->getClientOriginalName();
+            $fileName = preg_replace('/\s+/', '', $originalName);
             $validation['avatar'] = md5(microtime()) . '_' . $fileName;
             $request->avatar->move(public_path('siswa-images'), $validation['avatar']);
         } else $validation['avatar'] = 'avatar.jpg';
@@ -81,25 +75,16 @@ class SiswaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Siswa $siswa)
+    public function update(UpdateSiswaRequest $request, Siswa $siswa)
     {
-        $validation = $request->validate([
-            'nis' => 'required|digits:8',
-            'jurusan' => 'required',
-            'tempat_lahir' => 'required',
-            'tanggal_lahir' => 'required',
-            'email' => 'required|email',
-            'first_name' => 'required',
-            'last_name' => 'nullable',
-            'mobile' => 'required|min:10|max:13',
-            'avatar' => 'image|file|max:5000',
-        ]);
+        $validation = $request->validated();
 
         if ($request->file('avatar')) {
             if ($siswa->getOriginal()['avatar'] !== 'avatar.jpg') {
                 unlink("siswa-images/" . $siswa->getOriginal()['avatar']);
             }
-            $fileName = preg_replace('/\s+/', '', $request->file('avatar')->getClientOriginalName());
+            $originalName = $request->file('avatar')->getClientOriginalName();
+            $fileName = preg_replace('/\s+/', '', $originalName);
             $validation['avatar'] = md5(microtime()) . '_' . $fileName;
             $request->avatar->move(public_path('siswa-images'), $validation['avatar']);
         }
@@ -109,8 +94,7 @@ class SiswaController extends Controller
         $validation['full_name'] = $validation["first_name"] . " " . $validation["last_name"];
 
 
-        Siswa::where('id', $siswa->id)
-            ->update($validation);
+        Siswa::where('id', $siswa->id)->update($validation);
         return redirect('/')->with('success', 'Telah Mengubah Data Siswa');
     }
 
@@ -122,7 +106,6 @@ class SiswaController extends Controller
         if ($siswa->getOriginal()['avatar'] !== 'avatar.jpg') {
             unlink("siswa-images/" . $siswa->getOriginal()['avatar']);
         }
-
 
         Siswa::destroy($siswa->id);
         return redirect('/')->with('success', 'Data Siswa Telah Dihapus');

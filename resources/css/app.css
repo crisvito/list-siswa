@@ -9,9 +9,10 @@
     .form_input .input_data label {
         @apply absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0];
     }
-    .form_input button {
-        @apply text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center;
+    .form_input p {
+        @apply text-[10px] text-red-900 font-bold pt-1 uppercase;
     }
+
     .list_siswa td {
         @apply px-5 py-4;
     }

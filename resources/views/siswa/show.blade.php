@@ -30,7 +30,7 @@
                                 <dd>{{ $siswa->full_name }}
                                 </dd>
                             </div>
-                            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <div>
                                 <dt>NIS</dt>
                                 <dd>{{ $siswa->nis }}</dd>
                             </div>
@@ -38,7 +38,7 @@
                                 <dt>Email address</dt>
                                 <dd>{{ $siswa->email }}</dd>
                             </div>
-                            <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <div>
                                 <dt>Jurusan</dt>
                                 <dd>{{ $siswa->jurusan }}</dd>
                             </div>

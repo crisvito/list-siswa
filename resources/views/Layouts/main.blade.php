@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta>
+    <meta name="description" content="Website Untuk Data Siswa">
+
+    <link rel="shortcut icon" href={{ asset('assets/baslogoo.png') }} type="image/x-icon">
 
     <title>@yield('title') | Pages</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -17,12 +19,15 @@
     @include('Layouts.sidebar')
 
 
-    <div class="p-4 sm:ml-64">
+    <div class="p-4 sm:ml-64 min-h-screen">
         <div class="p-4 mt-14">
             @yield('container')
         </div>
     </div>
 
+    <div class="sm:ml-60">
+        @include('Layouts.footer')
+    </div>
 
     @include('Layouts.script')
 </body>

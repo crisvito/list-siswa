@@ -1,10 +1,10 @@
 <nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-300">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
         <div class="flex items-center justify-between">
-            <div class="flex items-center justify-start">
+            <div class="flex items-center justify-start gap-3">
                 <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
                     type="button"
-                    class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
+                    class="inline-flex items-center p-2 pb-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
                     <i class="fa-solid fa-bars"></i>
                 </button>
                 <h2 class="font-bold text-slate-800 text-xl tracking-wide">DASHBOARD</h2>

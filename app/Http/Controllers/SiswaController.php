@@ -6,7 +6,6 @@ use App\Http\Requests\StoreSiswaRequest;
 use App\Http\Requests\UpdateSiswaRequest;
 use App\Models\Siswa;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class SiswaController extends Controller
 {
@@ -78,6 +77,17 @@ class SiswaController extends Controller
     public function update(UpdateSiswaRequest $request, Siswa $siswa)
     {
         $validation = $request->validated();
+
+        if ($request->nis != $siswa->nis) {
+            $request->validate(['nis' => 'unique:siswas']);
+        }
+        if ($request->email != $siswa->email) {
+            $request->validate(['email' => 'unique:siswas']);
+        }
+        if ($request->mobile != $siswa->mobile) {
+            $request->validate(['mobile' => 'unique:siswas']);
+        }
+
 
         if ($request->file('avatar')) {
             if ($siswa->getOriginal()['avatar'] !== 'avatar.jpg') {

@@ -29,7 +29,7 @@ class StoreSiswaRequest extends FormRequest
             'email' => 'required|unique:siswas|email',
             'first_name' => 'required',
             'last_name' => 'nullable',
-            'mobile' => 'required|min:10|max:13',
+            'mobile' => 'required|min:10|max:13|unique:siswas',
             'avatar' => 'image|file|max:5000',
         ];
     }

@@ -22,14 +22,14 @@ class UpdateSiswaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nis' => 'required|digits:8',
+            'nis' => "required|digits:8|unique:siswas,nis,{$this->siswa->id}",
             'jurusan' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
-            'email' => 'required|email',
+            'email' => "required|email|unique:siswas,email,{$this->siswa->id}",
             'first_name' => 'required',
             'last_name' => 'nullable',
-            'mobile' => 'required|min:10|max:13',
+            'mobile' => "required|min:10|max:13|unique:siswas,mobile,{$this->siswa->id}",
             'avatar' => 'image|file|max:5000',
         ];
     }
@@ -37,6 +37,7 @@ class UpdateSiswaRequest extends FormRequest
     {
         return [
             'required' => ':attribute harus di isi.',
+            'unique' => ':attribute sudah ada.',
             'email' => ':attribute harus valid',
             'nis.digits' => ':attribute harus 8 angka',
             'mobile.min' => ':attribute minimal 10 angka',

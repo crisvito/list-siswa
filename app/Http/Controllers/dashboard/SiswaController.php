@@ -36,9 +36,8 @@ class SiswaController extends Controller
         $validation = $request->validated();
 
         if ($request->file('avatar')) {
-            $originalName = $request->file('avatar')->getClientOriginalName();
-            $fileName = preg_replace('/\s+/', '', $originalName);
-            $validation['avatar'] = md5(microtime()) . '_' . $fileName;
+            $oriName = $request->file('avatar')->getClientOriginalName();
+            $validation['avatar'] = md5(microtime()) . preg_replace('/\s+/', '', $oriName);
             $request->avatar->move(public_path('siswa-images'), $validation['avatar']);
         } else $validation['avatar'] = 'avatar.jpg';
 
@@ -76,26 +75,15 @@ class SiswaController extends Controller
      */
     public function update(UpdateSiswaRequest $request, Siswa $siswa)
     {
+
         $validation = $request->validated();
-
-        if ($request->nis != $siswa->nis) {
-            $request->validate(['nis' => 'unique:siswas']);
-        }
-        if ($request->email != $siswa->email) {
-            $request->validate(['email' => 'unique:siswas']);
-        }
-        if ($request->mobile != $siswa->mobile) {
-            $request->validate(['mobile' => 'unique:siswas']);
-        }
-
 
         if ($request->file('avatar')) {
             if ($siswa->getOriginal()['avatar'] !== 'avatar.jpg') {
                 unlink("siswa-images/" . $siswa->getOriginal()['avatar']);
             }
-            $originalName = $request->file('avatar')->getClientOriginalName();
-            $fileName = preg_replace('/\s+/', '', $originalName);
-            $validation['avatar'] = md5(microtime()) . '_' . $fileName;
+            $oriName = $request->file('avatar')->getClientOriginalName();
+            $validation['avatar'] = md5(microtime()) . preg_replace('/\s+/', '', $oriName);
             $request->avatar->move(public_path('siswa-images'), $validation['avatar']);
         }
 

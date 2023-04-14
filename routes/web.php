@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\auth\LoginController;
+use App\Http\Controllers\auth\RegisterController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\dashboard\SiswaController;
+use App\Http\Controllers\guest\GuestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +17,13 @@ use App\Http\Controllers\SiswaController;
 |
 */
 
-Route::get('/', [SiswaController::class, 'index']);
+Route::get('/', [GuestController::class, 'index']);
 
-Route::resource('siswas', SiswaController::class)->except('index')->scoped([
+Route::resource('siswa', SiswaController::class)->except('show')->scoped([
   'siswa' => 'slug',
 ]);;
+
+
+Route::get('/login', [LoginController::class, 'index']);
+
+Route::get('/register', [RegisterController::class, 'index']);

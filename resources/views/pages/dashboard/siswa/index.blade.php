@@ -1,4 +1,4 @@
-@extends('Layouts.main')
+@extends('layouts.admin')
 @section('title', 'Welcome')
 
 @section('container')
@@ -49,7 +49,7 @@
                         <td>{{ $item->nis }}</td>
                         <td>{{ $item->jurusan }}</td>
                         <td>
-                            <a href={{ route('siswas.edit', $item->slug) }}
+                            <a href={{ route('siswa.edit', $item->slug) }}
                                 class="font-medium text-blue-600 hover:underline border-r border-blue-900 pr-2 pl-1">
                                 Ubah
                             </a>
@@ -59,7 +59,7 @@
                                 Detail
                             </button>
 
-                            <form action={{ route('siswas.destroy', $item->slug) }} method="POST" class="inline-flex">
+                            <form action={{ route('siswa.destroy', $item->slug) }} method="POST" class="inline-flex">
                                 @method('delete')
                                 @csrf
                                 <button class=".show_confirm font-medium text-red-600 hover:underline pl-1 inline"
@@ -69,7 +69,7 @@
                             </form>
                         </td>
                     </tr>
-                    @include('siswa.show', ['siswa' => $item])
+                    @include('pages.dashboard.siswa.show', ['siswa' => $item])
                 @endforeach
             </tbody>
         </table>

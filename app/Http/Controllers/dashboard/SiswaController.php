@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreSiswaRequest;
-use App\Http\Requests\UpdateSiswaRequest;
+namespace App\Http\Controllers\dashboard;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\siswa\StoreSiswaRequest;
+use App\Http\Requests\siswa\UpdateSiswaRequest;
 use App\Models\Siswa;
-use Illuminate\Http\Request;
 
 class SiswaController extends Controller
 {
@@ -15,8 +16,8 @@ class SiswaController extends Controller
     public function index()
     {
 
-        return view('home', [
-            'siswa' => Siswa::latest()->filter(request('s'))->paginate(5)
+        return view('pages.dashboard.siswa.index', [
+            'siswa' => Siswa::latest()->filter(request('s'))->paginate(5),
         ]);
     }
 
@@ -25,7 +26,7 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        return view('siswa.create');
+        return view('pages.dashboard.siswa.create');
     }
 
     /**
@@ -33,31 +34,21 @@ class SiswaController extends Controller
      */
     public function store(StoreSiswaRequest $request)
     {
-        $validation = $request->validated();
+        $validated = $request->validated();
 
         if ($request->file('avatar')) {
             $oriName = $request->file('avatar')->getClientOriginalName();
-            $validation['avatar'] = md5(microtime()) . preg_replace('/\s+/', '', $oriName);
-            $request->avatar->move(public_path('siswa-images'), $validation['avatar']);
-        } else $validation['avatar'] = 'avatar.jpg';
+            $validated['avatar'] = md5(time()) . preg_replace('/\s+/', '', $oriName);
+            $request->avatar->move(public_path('siswa-images'), $validated['avatar']);
+        } else $validated['avatar'] = 'avatar.jpg';
 
-        $name = strtolower($validation["first_name"] . "-" . $validation["last_name"]);
-        $validation["slug"] = "$name-" . $validation['nis'];
-        $validation['full_name'] = $validation["first_name"] . " " . $validation["last_name"];
+        $name = strtolower($validated["first_name"] . "-" . $validated["last_name"]);
+        $validated["slug"] = "$name-" . $validated['nis'];
+        $validated['full_name'] = $validated["first_name"] . " " . $validated["last_name"];
 
 
-        Siswa::create($validation);
-        return redirect('/')->with('success', 'Telah Menambah Data Siswa');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Siswa $siswa)
-    {
-        return view('siswa.show', [
-            'siswa' => $siswa
-        ]);
+        Siswa::create($validated);
+        return redirect('/siswa')->with('success', 'Telah Menambah Data Siswa');
     }
 
     /**
@@ -65,7 +56,7 @@ class SiswaController extends Controller
      */
     public function edit(Siswa $siswa)
     {
-        return view('siswa.edit', [
+        return view('pages.dashboard.siswa.edit', [
             'siswa' => $siswa
         ]);
     }
@@ -76,24 +67,24 @@ class SiswaController extends Controller
     public function update(UpdateSiswaRequest $request, Siswa $siswa)
     {
 
-        $validation = $request->validated();
+        $validated = $request->validated();
 
         if ($request->file('avatar')) {
             if ($siswa->getOriginal()['avatar'] !== 'avatar.jpg') {
                 unlink("siswa-images/" . $siswa->getOriginal()['avatar']);
             }
             $oriName = $request->file('avatar')->getClientOriginalName();
-            $validation['avatar'] = md5(microtime()) . preg_replace('/\s+/', '', $oriName);
-            $request->avatar->move(public_path('siswa-images'), $validation['avatar']);
+            $validated['avatar'] = md5(time()) . preg_replace('/\s+/', '', $oriName);
+            $request->avatar->move(public_path('siswa-images'), $validated['avatar']);
         }
 
-        $name = strtolower($validation["first_name"] . "-" . $validation["last_name"]);
-        $validation["slug"] = "$name-" . $validation['nis'];
-        $validation['full_name'] = $validation["first_name"] . " " . $validation["last_name"];
+        $name = strtolower($validated["first_name"] . "-" . $validated["last_name"]);
+        $validated["slug"] = "$name-" . $validated['nis'];
+        $validated['full_name'] = $validated["first_name"] . " " . $validated["last_name"];
 
 
-        Siswa::where('id', $siswa->id)->update($validation);
-        return redirect('/')->with('success', 'Telah Mengubah Data Siswa');
+        Siswa::where('id', $siswa->id)->update($validated);
+        return redirect('/siswa')->with('success', 'Telah Mengubah Data Siswa');
     }
 
     /**
@@ -106,6 +97,6 @@ class SiswaController extends Controller
         }
 
         Siswa::destroy($siswa->id);
-        return redirect('/')->with('success', 'Data Siswa Telah Dihapus');
+        return redirect('/siswa')->with('success', 'Data Siswa Telah Dihapus');
     }
 }

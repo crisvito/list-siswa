@@ -1,11 +1,11 @@
-@extends('Layouts.main')
+@extends('layouts.admin')
 @section('title', 'Edit')
 
 @section('container')
     <h1 class="font-medium text-sm sm:text-xl pb-3">
         Tambah Data Siswa
     </h1>
-    <form method="POST" action={{ route('siswas.update', $siswa->slug) }} enctype="multipart/form-data"
+    <form method="POST" action={{ route('siswa.update', $siswa->slug) }} enctype="multipart/form-data"
         class="form_input w-full md:w-3/4 border-2 border-slate-300 p-5 rounded-lg shadow-2xl tracking-wide">
         @csrf
         @method('put')

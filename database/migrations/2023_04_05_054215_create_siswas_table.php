@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('tanggal_lahir');
             $table->string('email')->unique();
             $table->string('avatar')->nullable();
-            $table->bigInteger('mobile')->unique();
+            $table->string('mobile')->unique();
             $table->timestamps();
         });
     }

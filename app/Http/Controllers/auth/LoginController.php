@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\auth\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class LoginController extends Controller
 {
@@ -21,7 +22,10 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/');
+            $response = Gate::inspect('admin');
+
+            if ($response->allowed()) return redirect()->route('siswa.index');
+            else return redirect()->intended('/');
         }
         return back()->with('loginFailed', 'Gagal Login, Mungkin anda salah password');
     }

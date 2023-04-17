@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    @include('partials.sidebar')
+    @include('partials.admin.sidebar')
 
 
     <div class="p-4 sm:ml-64 min-h-screen">

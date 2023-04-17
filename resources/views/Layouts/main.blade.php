@@ -16,16 +16,14 @@
 </head>
 
 <body>
-    @include('partials.sidebar')
+    @include('partials.navbar')
 
 
-    <div class="p-4 sm:ml-64 min-h-screen">
-        <div class="p-4 mt-14">
-            @yield('container')
-        </div>
+    <div class="min-h-screen">
+        @yield('container')
     </div>
 
-    <div class="sm:ml-60">
+    <div>
         @include('partials.footer')
     </div>
 

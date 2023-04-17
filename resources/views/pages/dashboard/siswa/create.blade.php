@@ -17,7 +17,7 @@
                     NIS
                 </label>
                 @error('nis')
-                    <p> {{ $message }} </p>
+                    <p class="error"> {{ $message }} </p>
                 @enderror
             </div>
 
@@ -29,7 +29,7 @@
                     Jurusan
                 </label>
                 @error('jurusan')
-                    <p> {{ $message }} </p>
+                    <p class="error"> {{ $message }} </p>
                 @enderror
             </div>
         </div>
@@ -42,7 +42,7 @@
                     Tempat Lahir
                 </label>
                 @error('tempat_lahir')
-                    <p> {{ $message }} </p>
+                    <p class="error"> {{ $message }} </p>
                 @enderror
             </div>
             <div class="relative z-0 w-full group">
@@ -52,7 +52,7 @@
                         placeholder="Select date" name="tanggal_lahir" value="{{ old('tanggal_lahir') }}">
                 </div>
                 @error('tanggal_lahir')
-                    <p> {{ $message }} </p>
+                    <p class="error"> {{ $message }} </p>
                 @enderror
             </div>
         </div>
@@ -65,7 +65,7 @@
                     Email
                 </label>
                 @error('email')
-                    <p> {{ $message }} </p>
+                    <p class="error"> {{ $message }} </p>
                 @enderror
             </div>
             <div class="input_data relative z-0 w-full mb-6 group">
@@ -76,7 +76,7 @@
                     No Telepon
                 </label>
                 @error('mobile')
-                    <p> {{ $message }} </p>
+                    <p class="error"> {{ $message }} </p>
                 @enderror
             </div>
 
@@ -90,7 +90,7 @@
                     Nama Depan
                 </label>
                 @error('first_name')
-                    <p> {{ $message }} </p>
+                    <p class="error"> {{ $message }} </p>
                 @enderror
             </div>
             <div class="input_data relative z-0 w-full mb-6 group">
@@ -102,7 +102,7 @@
                     <span class="text-xs">* opsional</span>
                 </label>
                 @error('last_name')
-                    <p> {{ $message }} </p>
+                    <p class="error"> {{ $message }} </p>
                 @enderror
             </div>
         </div>
@@ -113,7 +113,7 @@
             </label>
             <input id="avatar" type="file" value="{{ old('avatar') }}" name="avatar" onchange="getImg(event)">
             @error('avatar')
-                <p> {{ $message }} </p>
+                <p class="error"> {{ $message }} </p>
             @enderror
         </div>
         <div class="input_file relative z-0 w-full mb-6 group">

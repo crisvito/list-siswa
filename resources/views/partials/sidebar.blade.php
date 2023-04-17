@@ -24,7 +24,13 @@
     <div class="h-full px-3 pb-4 overflow-y-auto bg-white">
         <ul class="space-y-2 font-medium tracking-wide">
             <li>
-                <a href="/" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-200">
+                <a href="/dashboard" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-200">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="ml-3">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="/siswa" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-200">
                     <i class="fa-solid fa-house"></i>
                     <span class="ml-3">Siswa</span>
                 </a>

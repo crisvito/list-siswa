@@ -19,11 +19,25 @@ use App\Http\Controllers\guest\GuestController;
 
 Route::get('/', [GuestController::class, 'index']);
 
-Route::resource('siswa', SiswaController::class)->except('show')->scoped([
-  'siswa' => 'slug',
-]);;
+Route::middleware(['auth'])->group(function () {
 
 
-Route::get('/login', [LoginController::class, 'index']);
+  Route::prefix('dashboard')->group(function () {
+    // Route::get('/', )
+    Route::resource('siswa', SiswaController::class)->except('show')->scoped([
+      'siswa' => 'slug',
+    ]);
+  });
+});
 
-Route::get('/register', [RegisterController::class, 'index']);
+Route::middleware(['guest'])->group(function () {
+
+  Route::get('/login', [LoginController::class, 'index'])->name('login');
+  Route::post('/login', [LoginController::class, 'authenticate']);
+
+
+  Route::get('/register', [RegisterController::class, 'index']);
+  Route::post('/register', [RegisterController::class, 'register']);
+});
+
+Route::post('/logout', [LoginController::class, 'logout']);

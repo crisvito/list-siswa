@@ -1,5 +1,5 @@
-@extends('layouts.guest')
-@section('title', 'Login')
+@extends('layouts.main')
+@section('title', 'Register')
 
 @section('container')
     <div class="flex min-h-full w-full justify-center py-24 bg-gray-100">
@@ -9,19 +9,26 @@
                 <h2 class="mt-6 text-center text-xl font-bold tracking-wide text-gray-900">Registrasi Akun Terlebih Dahulu
                 </h2>
             </div>
-            <form class="login mt-8 space-y-6 flex flex-col" action="#" method="POST">
+            <form class="login mt-8 space-y-6 flex flex-col" action="/register" method="POST">
+                @csrf
                 <div class="space-y-6">
                     <div>
-                        <input id="email" name="email" type="email" placeholder="Email">
-                    </div>
-                    <div>
-                        <input id="nis" name="nis" type="text" placeholder="NIS">
+                        <input id="email" name="email" type="email" placeholder="Email" value={{ old('email') }}>
+                        @error('email')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
                         <input id="password" name="password" type="password" placeholder="Password">
+                        @error('password')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
                         <input id="passwordConfirm" name="password_confirm" type="password" placeholder="password Confirm">
+                        @error('password_confirm')
+                            <p class="error">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
                 <div class="flex items-center justify-end">

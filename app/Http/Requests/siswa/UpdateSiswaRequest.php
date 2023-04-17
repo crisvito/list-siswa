@@ -39,9 +39,9 @@ class UpdateSiswaRequest extends FormRequest
             'required' => ':attribute harus di isi.',
             'unique' => ':attribute sudah ada.',
             'email' => ':attribute harus valid',
-            'nis.digits' => ':attribute harus 8 angka',
-            'mobile.min' => ':attribute minimal 10 angka',
-            'mobile.max' => ':attribute minimal 13 angka',
+            'nis.digits' => ':attribute harus :digits angka',
+            'mobile.min' => ':attribute minimal :min angka',
+            'mobile.max' => ':attribute minimal :max angka',
             'avatar.max' => ':attribute minimal 5mb',
             'avatar.image' => ':attribute harus berbentuk gambar',
         ];

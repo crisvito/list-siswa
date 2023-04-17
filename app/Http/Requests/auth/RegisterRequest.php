@@ -11,7 +11,7 @@ class RegisterRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,29 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'email' => 'required|exists:siswas,email|unique:users',
+            'password' => 'required|min:7',
+            'password_confirm' => 'required_with:password|same:password|min:7'
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'exists' => ':attribute tidak terdaftar dalam sekolah',
+            'unique' => ':attribute sudah registrasi',
+            'required' => ':attribute harus di isi',
+            'same' => ':attribute tidak sama',
+            'min' => ':attribute minimal :min huruf',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'email' => 'email',
+            'password' => 'password',
+            'password_confirm' => 'password confirm',
         ];
     }
 }

@@ -21,17 +21,18 @@
 <aside id="logo-sidebar"
     class="fixed top-0 left-0 z-40 w-60 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-300 sm:translate-x-0"
     aria-label="Sidebar">
-    <div class="h-full px-3 pb-4 overflow-y-auto bg-white">
+    <div class="h-full px-3 pb-4 overflow-y-auto bg-white flex flex-col place-content-between">
         <ul class="space-y-2 font-medium tracking-wide">
             <li>
-                <a href="/dashboard" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-200">
-                    <i class="fa-solid fa-house"></i>
-                    <span class="ml-3">Home</span>
+                <a href="/admin/dashboard" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-200">
+                    <i class="fa-solid fa-list"></i>
+                    <span class="ml-3">Dashboard</span>
                 </a>
             </li>
             <li>
-                <a href="/siswa" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-200">
-                    <i class="fa-solid fa-house"></i>
+                <a href={{ route('siswa.index') }}
+                    class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-200">
+                    <i class="fa-solid fa-magnifying-glass"></i>
                     <span class="ml-3">Siswa</span>
                 </a>
             </li>
@@ -40,6 +41,14 @@
                     class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-200">
                     <i class="fa-solid fa-square-plus text-lg"></i>
                     <span class="ml-3">Create</span>
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <a href="/" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-200">
+                    <i class="fa-solid fa-house"></i>
+                    <span class="ml-3 font-semibold">Home</span>
                 </a>
             </li>
         </ul>

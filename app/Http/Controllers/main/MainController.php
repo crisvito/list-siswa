@@ -12,7 +12,7 @@ class MainController extends Controller
     public function index()
     {
         return view('pages.main.welcome', [
-            'siswa' => Siswa::where('id', auth()->user()->siswa_id)->get()
+            // 'siswa' => Siswa::where('id', auth()->user()->siswa_id)->get()
         ]);
     }
 }

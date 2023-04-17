@@ -28,7 +28,9 @@ Route::middleware(['auth', 'can:admin'])->group(function () {
   Route::prefix('admin/dashboard')->group(function () {
 
     Route::get('/', [DashboardController::class, 'index']);
-    Route::resource('siswa', SiswaController::class)->except('show');
+    Route::resource('siswa', SiswaController::class)
+      ->except('show')
+      ->scoped(['siswa' => 'slug']);
   });
 });
 

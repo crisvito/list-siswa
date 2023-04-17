@@ -11,7 +11,7 @@
                     {{ session('success') }}
                 </div>
             @endif
-            <form action="/" class="relative" method="GET">
+            <form action={{ route('siswa.index') }} class="relative" method="GET">
                 <input type="text" id="table-search-users"
                     class="block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg w-96 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="Cari Data siswa ( nis, nama, email, jurusan, mobile )" name="s"

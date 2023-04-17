@@ -2,5 +2,6 @@
 @section('title', 'Welcome')
 
 @section('container')
-    <h1>Selamat Datang Di website basschool</h1>
+    <h1>Data Anda</h1>
+    {{ $siswa }}
 @endsection

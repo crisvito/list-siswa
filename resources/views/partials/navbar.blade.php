@@ -35,7 +35,6 @@
                 @can('warga')
                     <li><a href="/dashboard">Dashboard</a></li>
                 @endcan
-                <li><a href="#">Services</a></li>
             </ul>
         </div>
     </div>

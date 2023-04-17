@@ -69,7 +69,7 @@
                             </form>
                         </td>
                     </tr>
-                    @include('pages.dashboard.siswa.show', ['siswa' => $item])
+                    @include('pages.admin.siswa.show', ['siswa' => $item])
                 @endforeach
             </tbody>
         </table>

@@ -1,10 +1,14 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\RegisterController;
-use App\Http\Controllers\dashboard\DashboardController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\dashboard\SiswaController;
+
+use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\SiswaController;
+
+use App\Http\Controllers\user\DashboardController as UserDashboardController;
 use App\Http\Controllers\main\MainController;
 
 /*
@@ -39,7 +43,7 @@ Route::middleware(['auth', 'can:admin'])->group(function () {
 Route::middleware(['auth'])->group(function () {
   Route::prefix('dashboard')->group(function () {
 
-    Route::get('/', [MainController::class, 'index']);
+    Route::get('/', [UserDashboardController::class, 'index']);
   });
 });
 

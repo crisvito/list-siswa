@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Controllers\dashboard;
+namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\siswa\StoreSiswaRequest;
@@ -16,7 +16,7 @@ class SiswaController extends Controller
     public function index()
     {
 
-        return view('pages.dashboard.siswa.index', [
+        return view('pages.admin.siswa.index', [
             'siswa' => Siswa::latest()->filter(request('s'))->paginate(5),
         ]);
     }
@@ -26,7 +26,7 @@ class SiswaController extends Controller
      */
     public function create()
     {
-        return view('pages.dashboard.siswa.create');
+        return view('pages.admin.siswa.create');
     }
 
     /**
@@ -58,7 +58,7 @@ class SiswaController extends Controller
      */
     public function edit(Siswa $siswa)
     {
-        return view('pages.dashboard.siswa.edit', [
+        return view('pages.admin.siswa.edit', [
             'siswa' => $siswa
         ]);
     }

@@ -16,7 +16,7 @@ DB_DATABASE=sekolah
 Migrate Schema :
 
 ```sh
-php artisan migrate
+php artisan migrate:fresh --seed
 ```
 
 Install depedencies :

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\siswa\StoreSiswaRequest;
 use App\Http\Requests\siswa\UpdateSiswaRequest;
 use App\Models\Siswa;
+use App\Models\User;
 
 class SiswaController extends Controller
 {
@@ -100,6 +101,7 @@ class SiswaController extends Controller
             unlink("siswa-images/" . $siswa->getOriginal()['avatar']);
         }
 
+        User::where('siswa_id', $siswa->id)->delete();
         Siswa::destroy($siswa->id);
         return redirect()
             ->route('siswa.index')

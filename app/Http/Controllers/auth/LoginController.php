@@ -25,7 +25,7 @@ class LoginController extends Controller
             $response = Gate::inspect('admin');
 
             if ($response->allowed()) return redirect()->route('siswa.index');
-            else return redirect()->intended('/');
+            else return redirect()->intended('/dashboard');
         }
         return back()->with('loginFailed', 'Gagal Login, Mungkin anda salah password');
     }

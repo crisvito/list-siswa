@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('email')->unique();
             $table->string('password');
-            $table->foreignId('siswa_id');
             $table->boolean('is_admin')->default(false);
             $table->timestamps();
         });

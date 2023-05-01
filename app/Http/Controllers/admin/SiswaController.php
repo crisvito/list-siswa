@@ -101,7 +101,7 @@ class SiswaController extends Controller
             unlink("siswa-images/" . $siswa->getOriginal()['avatar']);
         }
 
-        User::where('siswa_id', $siswa->id)->delete();
+        User::where('id', $siswa->user_id)->delete();
         Siswa::destroy($siswa->id);
         return redirect()
             ->route('siswa.index')

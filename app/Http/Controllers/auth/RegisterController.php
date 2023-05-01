@@ -20,10 +20,10 @@ class RegisterController extends Controller
 
         $validated['password'] = bcrypt($validated['password']);
 
-        $getSiswa = Siswa::where('email', $request->email)->get();
-        if ($getSiswa) $validated['siswa_id'] = $getSiswa[0]->getAttributes()['id'];
 
-        User::create($validated);
+        $user = User::create($validated);
+
+        Siswa::where('email', $request->email)->update(['user_id' => $user->id]);
         return redirect('/login')->with('success', 'Berhasil Registrasi');
     }
 }

@@ -28,10 +28,12 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('admin', function (User $user) {
             return $user->is_admin
                 ? Response::allow()
-                : Response::deny('Anda Bukan Admin.');;
+                : Response::deny('Anda Bukan Admin.');
         });
         Gate::define('warga', function (User $user) {
-            return !$user->is_admin;
+            return !$user->is_admin
+                ? Response::allow()
+                : Response::deny('Anda Bukan Warga.');
         });
     }
 }

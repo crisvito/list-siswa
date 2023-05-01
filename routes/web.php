@@ -40,7 +40,7 @@ Route::middleware(['auth', 'can:admin'])->group(function () {
 
 
 /* Route Warga */
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'can:warga'])->group(function () {
   Route::prefix('dashboard')->group(function () {
 
     Route::get('/', [UserDashboardController::class, 'index']);

@@ -26,12 +26,12 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::define('admin', function (User $user) {
-            return $user->is_admin
+            return $user->role_id == 1
                 ? Response::allow()
                 : Response::deny('Anda Bukan Admin.');
         });
         Gate::define('warga', function (User $user) {
-            return !$user->is_admin
+            return $user->role_id == 2
                 ? Response::allow()
                 : Response::deny('Anda Bukan Warga.');
         });
